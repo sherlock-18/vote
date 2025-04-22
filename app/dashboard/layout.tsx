@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<{
     id: number;
     name: string;
@@ -20,30 +20,30 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     role: string;
   } | null>(null);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/me");
-        if (res.ok) {
-          const userData = await res.json();
-          setUser(userData);
-          
-          if (userData.role === "admin") {
-            router.push("/admin/dashboard");
-          }
-        } else {
-          router.push("/login");
-        }
-      } catch (error) {
-        toast.error("Authentication failed");
-        router.push("/login");
-      } finally {
-        setLoading(false);
-      }
-    };
+    // useEffect(() => {
+    //   const checkAuth = async () => {
+    //     try {
+    //       const res = await fetch("/api/auth/me");
+    //       if (res.ok) {
+    //         const userData = await res.json();
+    //         setUser(userData);
+            
+    //         if (userData.role === "admin") {
+    //           router.push("/admin/dashboard");
+    //         }
+    //       } else {
+    //         router.push("/login");
+    //       }
+    //     } catch (error) {
+    //       toast.error("Authentication failed");
+    //       router.push("/login");
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
 
-    checkAuth();
-  }, [router]);
+    //   checkAuth();
+    // }, [router]);
 
   if (loading) {
     return (

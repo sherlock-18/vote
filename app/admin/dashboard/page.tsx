@@ -315,7 +315,7 @@ export default function AdminDashboardPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredCandidates.map((candidate) => (
+                  {filteredCandidates?.map((candidate) => (
                     <TableRow key={candidate.id}>
                       <TableCell className="font-medium">{candidate.name}</TableCell>
                       <TableCell>{candidate.party}</TableCell>

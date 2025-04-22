@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import type { z } from "zod";
 import { loginSchema } from "@/lib/utils/validators";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -52,8 +52,8 @@ export default function Login() {
         throw new Error(result.message || "Failed to log in");
       }
 
-      toast.success("Logged in successfully!");
-      router.push("/dashboard");
+      console.log("🚀 ~ onSubmit ~ result:", result);
+      router.push('/dashboard');
     } catch (error) {
       console.error("Login error:", error);
       toast.error(error instanceof Error ? error.message : "Failed to log in");
